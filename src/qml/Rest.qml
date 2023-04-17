@@ -8,7 +8,7 @@ QtObject {
     property string baseUrl: "http://127.0.0.1:8000/"
     property string tokenType: "JWT"
 
-    function request(token, verb, endpoint, body, timeout, cb, customHeaders=undefined)
+    function request(verb, endpoint, token, body, callback, timeout, customHeaders=undefined)
     {
         var qhr = QmlHttpRequest.newRequest()
 
@@ -17,8 +17,8 @@ QtObject {
         }
 
         qhr.ontimeout = () => {
-            if (cb instanceof Function) {
-                cb({
+            if (callback instanceof Function) {
+                callback({
                        "Error": "Service is unavailable"
                    }, 0)
             }
@@ -33,18 +33,18 @@ QtObject {
                     console.error(`<Failed   : ${qhr.status}>: ${verb + " ".repeat(6 - verb.length)}  ${baseUrl + endpoint}; ${isServerError ? 'Internal Server Error' : qhr.responseText }`)
                 }
 
-                if (cb instanceof Function) {
+                if (callback instanceof Function) {
                     if (qhr.responseText !== "") {
                         let response = toJsObject(qhr.responseText)
                         if (response) {
-                            cb(response, qhr.status)
+                            callback(response, qhr.status)
                         } else {
-                            cb({
+                            callback({
                                    "Error": "Undefined error occured"
                                }, qhr.status)
                         }
                     } else {
-                        cb({
+                        callback({
                                "Error": "Undefined error occured"
                            }, qhr.status)
                     }
@@ -81,26 +81,26 @@ QtObject {
 
 
     //-- get
-    function get(endpoint, token_access, callBack, timeout = 40000, customHeaders=undefined)
+    function get(endpoint, token, callback, timeout=40000, customHeaders=undefined)
     {
-        return request(token_access, "GET", endpoint, undefined, timeout, callBack, customHeaders)
+        return request("GET", endpoint, token, undefined, timeout, callback, customHeaders)
     }
 
     //-- add
-    function post(endpoint, token_access, body, callBack, timeout = 40000, customHeaders=undefined)
+    function post(endpoint, token, body, callback, timeout=40000, customHeaders=undefined)
     {
-        return request(token_access, "POST", endpoint, body, timeout, callBack, customHeaders)
+        return request("POST", endpoint, token, body, timeout, callback, customHeaders)
     }
 
     //-- edit
-    function put(endpoint, token_access, body, callBack, timeout = 40000, customHeaders=undefined)
+    function put(endpoint, token, body, callback, timeout=40000, customHeaders=undefined)
     {
-        return request(token_access, "PATCH", endpoint, body, timeout, callBack, customHeaders)
+        return request("PATCH", endpoint, token, body, timeout, callback, customHeaders)
     }
 
     //-- delete
-    function del(endpoint, token_access, callBack, timeout = 40000, customHeaders=undefined)
+    function del(endpoint, token, body, callback, timeout=40000, customHeaders=undefined)
     {
-        return request(token_access, "DELETE", endpoint, undefined, timeout, callBack, customHeaders)
+        return request("DELETE", endpoint, token, body, timeout, callback, customHeaders)
     }
 }
