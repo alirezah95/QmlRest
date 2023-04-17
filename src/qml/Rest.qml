@@ -6,7 +6,7 @@ import QmlHttpRequest 1.6
 
 QtObject {
     property string baseUrl: "http://127.0.0.1:8000/"
-    property string authorizationType: "JWT"
+    property string tokenType: "JWT"
 
     function request(token, verb, endpoint, body, timeout, cb, customHeaders=undefined)
     {
