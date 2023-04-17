@@ -1,9 +1,11 @@
+pragma Singleton
+
 import QtQuick 2.15
 
 import QmlHttpRequest 1.6
 
-Item {
-    required property string baseUrl: "http://127.0.0.1:8000/"
+QtObject {
+    property string baseUrl: "http://127.0.0.1:8000/"
     property string authorizationType: "JWT"
 
     function request(token, verb, endpoint, body, timeout, cb, customHeaders=undefined)
@@ -97,7 +99,7 @@ Item {
     }
 
     //-- delete
-    function remove(endpoint, token_access, callBack, timeout = 40000, customHeaders=undefined)
+    function del(endpoint, token_access, callBack, timeout = 40000, customHeaders=undefined)
     {
         return request(token_access, "DELETE", endpoint, undefined, timeout, callBack, customHeaders)
     }
