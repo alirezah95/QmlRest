@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.24.1)
 set(PARENT_PROJECT_NAME "${PROJECT_NAME}")
 
 set(PROJECT_NAME "RestQml")
-set(PROJECT_VERSION_MAJOR 0)
-set(PROJECT_VERSION_MINOR 1)
+set(PROJECT_VERSION_MAJOR 1)
+set(PROJECT_VERSION_MINOR 0)
 set(PROJECT_VERSION_PATCH 0)
 set(PROJECT_VERSION_TWEAK 0)
 if (PROJECT_VERSION_TWEAK EQUAL 0)
@@ -24,11 +24,6 @@ set(PROJECT_HOMEPAGE_URL "https://github.com/alirezah95/RestQml")
 if(QT_VERSION_MAJOR EQUAL 6)
     # For Qt 6.2.x and Qt 6.3.x, major version in qt_add_qml_module() must be
     # greater than zero otherwise module is not registered
-    set(MODULE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
-    if (MODULE_VERSION_MAJOR EQUAL 0)
-        set(MODULE_VERSION_MAJOR 1)
-    endif()
-
     set_source_files_properties(
         src/qml/Status.qml
         src/qml/Rest.qml
@@ -41,7 +36,7 @@ if(QT_VERSION_MAJOR EQUAL 6)
         SHARED
         OUTPUT_DIRECTORY
             ${CMAKE_BINARY_DIR}/RestQml
-        VERSION ${MODULE_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+        VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
         QML_FILES
             src/qml/Rest.qml
             src/qml/Status.qml
