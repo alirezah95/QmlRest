@@ -52,13 +52,13 @@ QtObject {
             }
         }
 
-        qhr.open(verb, idInternal.baseUrl + endpoint)
+        qhr.open(verb, baseUrl + endpoint)
         var contentType = customHeaders && customHeaders.hasOwnProperty("Content-Type")
                 ? customHeaders["Content-Type"] : "application/json"
         qhr.setRequestHeader("Content-Type", contentType)
         qhr.setRequestHeader("Accept", "application/json")
         if (token) {
-            qhr.setRequestHeader("Authorization", `${JWT} ${token}`)
+            qhr.setRequestHeader("Authorization", `${tokenType} ${token}`)
         }
 
         var bd = body ? (contentType !== "multipart/form-data"
