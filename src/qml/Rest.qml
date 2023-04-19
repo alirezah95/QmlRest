@@ -83,24 +83,24 @@ QtObject {
     //-- get
     function get(endpoint, token, callback, timeout=40000, customHeaders=undefined)
     {
-        return request("GET", endpoint, token, undefined, timeout, callback, customHeaders)
+        return request("GET", endpoint, token, undefined, callback, timeout, customHeaders)
     }
 
     //-- add
     function post(endpoint, token, body, callback, timeout=40000, customHeaders=undefined)
     {
-        return request("POST", endpoint, token, body, timeout, callback, customHeaders)
+        return request("POST", endpoint, token, body, callback, timeout, customHeaders)
     }
 
     //-- edit
     function put(endpoint, token, body, callback, timeout=40000, customHeaders=undefined)
     {
-        return request("PATCH", endpoint, token, body, timeout, callback, customHeaders)
+        return request("PATCH", endpoint, token, body, callback, timeout, customHeaders)
     }
 
     //-- delete
     function del(endpoint, token, body, callback, timeout=40000, customHeaders=undefined)
     {
-        return request("DELETE", endpoint, token, body, timeout, callback, customHeaders)
+        return request("DELETE", endpoint, token, body, callback, timeout, customHeaders)
     }
 }
