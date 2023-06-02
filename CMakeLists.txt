@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.24)
 
 find_package(QT NAMES Qt6 Qt5)
 
-set(PROJECT_NAME "RestQml")
+set(PROJECT_NAME "QmlRest")
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 1)
 set(PROJECT_VERSION_PATCH 0)
