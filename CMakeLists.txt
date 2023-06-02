@@ -1,7 +1,6 @@
-cmake_minimum_required(VERSION 3.24.1)
+cmake_minimum_required(VERSION 3.24)
 
-# Store parent project name before setting project information
-set(PARENT_PROJECT_NAME "${PROJECT_NAME}")
+find_package(QT NAMES Qt6 Qt5)
 
 set(PROJECT_NAME "RestQml")
 set(PROJECT_VERSION_MAJOR 1)
@@ -18,7 +17,7 @@ set(PROJECT_LICENSE_TYPE "MIT")
 set(PROJECT_CREATOR "Alireza Hasani")
 set(PROJECT_LANGUAGES "QML")
 set(PROJECT_DESCRIPTION "A module providing common functionality for REST methods and exposing HTTP status code")
-set(PROJECT_HOMEPAGE_URL "https://github.com/alirezah95/RestQml")
+set(PROJECT_HOMEPAGE_URL "https://github.com/alirezah95/QmlRest")
 
 
 if(QT_VERSION_MAJOR EQUAL 6)
@@ -28,14 +27,12 @@ if(QT_VERSION_MAJOR EQUAL 6)
         src/qml/Status.qml
         src/qml/Rest.qml
         PROPERTIES
-        QT_QML_SINGLETON_TYPE TRUE
+            QT_QML_SINGLETON_TYPE TRUE
     )
 
     qt_add_qml_module(${PROJECT_NAME}
-        URI "RestQml"
+        URI "QmlRest"
         SHARED
-        OUTPUT_DIRECTORY
-            ${CMAKE_BINARY_DIR}/RestQml
         VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
         QML_FILES
             src/qml/Rest.qml
