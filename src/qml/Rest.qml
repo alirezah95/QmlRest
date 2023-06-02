@@ -1,8 +1,8 @@
 pragma Singleton
 
-import QtQuick 2.15
+import QtQuick
 
-import QmlHttpRequest 1.6
+import QmlHttpRequest
 
 QtObject {
     property string baseUrl: "http://127.0.0.1:8000/"
