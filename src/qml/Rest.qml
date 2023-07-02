@@ -5,7 +5,6 @@ import QtQuick
 import QmlHttpRequest
 
 QtObject {
-    property string baseUrl: "http://127.0.0.1:8000/"
     property string tokenType: "JWT"
 
     function request(verb, endpoint, token, body, callback, timeout, customHeaders=undefined)
@@ -27,10 +26,10 @@ QtObject {
         qhr.onreadystatechange = () => {
             if (qhr.readyState === QmlHttpRequest.Done) {
                 if (Math.floor(qhr.status / 100) === 2) {
-                    console.debug(`<Succeeded: ${qhr.status}>: ${verb + " ".repeat(6 - verb.length)}  ${baseUrl + endpoint};`)
+                    console.debug(`<Succeeded: ${qhr.status}>: ${verb + " ".repeat(6 - verb.length)}  ${endpoint};`)
                 } else {
                     var isServerError = qhr.status > Status.http_500_INTERNAL_SERVER_ERROR
-                    console.error(`<Failed   : ${qhr.status}>: ${verb + " ".repeat(6 - verb.length)}  ${baseUrl + endpoint}; ${isServerError ? 'Internal Server Error' : qhr.responseText }`)
+                    console.error(`<Failed   : ${qhr.status}>: ${verb + " ".repeat(6 - verb.length)}  ${endpoint}; ${isServerError ? 'Internal Server Error' : qhr.responseText }`)
                 }
 
                 if (callback instanceof Function) {
@@ -52,7 +51,7 @@ QtObject {
             }
         }
 
-        qhr.open(verb, baseUrl + endpoint)
+        qhr.open(verb, endpoint)
         var contentType = customHeaders && customHeaders.hasOwnProperty("Content-Type")
                 ? customHeaders["Content-Type"] : "application/json"
         qhr.setRequestHeader("Content-Type", contentType)
